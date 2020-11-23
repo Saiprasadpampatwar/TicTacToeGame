@@ -38,9 +38,9 @@ public class TicTacToeGame {
 	
 	public void DisplayBoard(char [] tictactoeboard) {
 		System.out.println(tictactoeboard[1]+ " | "+tictactoeboard[2]+ " | "+tictactoeboard[3]);
-		System.out.println("__________");
+		System.out.println("___________");
 		System.out.println(tictactoeboard[4]+ " | "+tictactoeboard[5]+ " | "+tictactoeboard[6]);
-		System.out.println("__________");
+		System.out.println("___________");
 		System.out.println(tictactoeboard[7]+ " | "+tictactoeboard[8]+ " | "+tictactoeboard[9]);
 	}
 
