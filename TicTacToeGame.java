@@ -8,15 +8,17 @@ public class TicTacToeGame {
 		TicTacToeGame TTTG = new TicTacToeGame();
 		TTTG.GameBoard();
 		TTTG.AbilityToChoosePlayer();
+		TTTG.DisplayBoard(TTTG.GameBoard());
 	}
 	
-	public void GameBoard() {
+	public char [] GameBoard() {
 		char [] tictactoeboard = new char[10]; 
 		for(int i=0; i<tictactoeboard.length;i++)
 		{
 			tictactoeboard[i]= ' ';
 		}
 		System.out.println("Created a Game Board of size "+ tictactoeboard.length);
+		return tictactoeboard;
 	}
 	
 	public void AbilityToChoosePlayer() {
@@ -32,6 +34,14 @@ public class TicTacToeGame {
 			computer = 'X';
 		}
 		System.out.println("letter choosen by computer: "+computer);
+	}
+	
+	public void DisplayBoard(char [] tictactoeboard) {
+		System.out.println(tictactoeboard[1]+ " | "+tictactoeboard[2]+ " | "+tictactoeboard[3]);
+		System.out.println("__________");
+		System.out.println(tictactoeboard[4]+ " | "+tictactoeboard[5]+ " | "+tictactoeboard[6]);
+		System.out.println("__________");
+		System.out.println(tictactoeboard[7]+ " | "+tictactoeboard[8]+ " | "+tictactoeboard[9]);
 	}
 
 }
