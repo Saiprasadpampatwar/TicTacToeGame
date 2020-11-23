@@ -2,24 +2,21 @@ import java.util.Scanner;
 
 public class TicTacToeGame {
 	static Scanner sc = new Scanner(System.in);
+		 
+	static char [] tictactoeboard = new char[10]; 		
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		System.out.println("Welcome to Tic Tac Toe");
-		TicTacToeGame TTTG = new TicTacToeGame();
-		TTTG.GameBoard();
-		TTTG.AbilityToChoosePlayer();
-		TTTG.DisplayBoard(TTTG.GameBoard());
-	}
-	
-	public char [] GameBoard() {
-		char [] tictactoeboard = new char[10]; 
 		for(int i=0; i<tictactoeboard.length;i++)
 		{
 			tictactoeboard[i]= ' ';
 		}
-		System.out.println("Created a Game Board of size "+ tictactoeboard.length);
-		return tictactoeboard;
+		TicTacToeGame TTTG = new TicTacToeGame();
+		TTTG.AbilityToChoosePlayer();
+		TTTG.AbilityToMove(tictactoeboard);
+		TTTG.DisplayBoard(tictactoeboard);
 	}
+	
 	
 	public void AbilityToChoosePlayer() {
 		System.out.println("Which letter you want to choose:\n 1.X (UpperCase)\n 2. O (UpperCase)");
@@ -42,6 +39,18 @@ public class TicTacToeGame {
 		System.out.println(tictactoeboard[4]+ " | "+tictactoeboard[5]+ " | "+tictactoeboard[6]);
 		System.out.println("___________");
 		System.out.println(tictactoeboard[7]+ " | "+tictactoeboard[8]+ " | "+tictactoeboard[9]);
+	}
+	
+	public void AbilityToMove(char [] tictactoeboard) {
+		System.out.println("Enter the position where you want to move from(1 to 9):");
+		int position = sc.nextInt();
+		if (position > 9 || position < 1) {
+			System.out.println("please enter valid position");	
+		}
+		else {
+			tictactoeboard[position] = 'X';
+		}
+		
 	}
 
 }
