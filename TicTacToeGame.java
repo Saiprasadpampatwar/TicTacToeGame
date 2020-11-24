@@ -14,6 +14,7 @@ public class TicTacToeGame {
 		TicTacToeGame TTTG = new TicTacToeGame();
 		TTTG.AbilityToChoosePlayer();
 		TTTG.AbilityToMove(tictactoeboard);
+		TTTG.AbilityToMove(tictactoeboard);
 		TTTG.DisplayBoard(tictactoeboard);
 	}
 	
@@ -48,7 +49,12 @@ public class TicTacToeGame {
 			System.out.println("please enter valid position");	
 		}
 		else {
-			tictactoeboard[position] = 'X';
+			if(tictactoeboard[position] == ' ')
+				tictactoeboard[position] = 'X';
+			else {
+				System.out.println("Enter Valid position\n");
+				AbilityToMove(tictactoeboard);
+			}
 		}
 		
 	}
