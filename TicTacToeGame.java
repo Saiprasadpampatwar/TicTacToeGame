@@ -51,7 +51,8 @@ public class TicTacToeGame {
 		System.out.println("Enter the position where you want to move from(1 to 9):");
 		int position = sc.nextInt();
 		if (position > 9 || position < 1) {
-			System.out.println("please enter valid position");	
+			System.out.println("please enter valid position");
+			abilityToMove(tictactoeboard);
 		}
 		else {
 			if(tictactoeboard[position] == ' ')
