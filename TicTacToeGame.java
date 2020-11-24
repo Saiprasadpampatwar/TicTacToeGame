@@ -28,8 +28,8 @@ public class TicTacToeGame {
 					break;
 				}
 				System.out.println("Computer is playing");
-				abilityToMove(board, computer);
-				if (isWinner(board, player)) {
+				computersTurn(board, computer);
+				if (isWinner(board, computer)) {
 					System.out.println("Computer own");
 					break;
 				}
@@ -38,9 +38,9 @@ public class TicTacToeGame {
 
 			}
 		} else {
-			abilityToMove(board, computer);
+			computersTurn(board, computer);
 			for (int i = 0; i < 4; i++) {
-				if (isWinner(board, player)) {
+				if (isWinner(board, computer)) {
 					System.out.println("Computer own");
 					break;
 				}
@@ -51,10 +51,11 @@ public class TicTacToeGame {
 					break;
 				}
 				System.out.println("Computer is playing");
-				abilityToMove(board, computer);
+				computersTurn(board, computer);
+				//abilityToMove(board, computer);
 			}
 		}
-		if(isTie(board)) {
+		if (isTie(board)) {
 			System.out.println("It's tie");
 		}
 	}
@@ -122,6 +123,7 @@ public class TicTacToeGame {
 		}
 		return result;
 	}
+
 	// Checking for winning condition
 	private static boolean isWinner(char[] tictactoeboard, char l) {
 		boolean result = ((tictactoeboard[1] == l && tictactoeboard[2] == l && tictactoeboard[3] == l)
@@ -134,12 +136,12 @@ public class TicTacToeGame {
 				|| (tictactoeboard[3] == l && tictactoeboard[5] == l && tictactoeboard[7] == l));
 		return result;
 	}
-	//checking for tie condition
+
+	// checking for tie condition
 	private static boolean isTie(char[] tictactoeboard) {
 		boolean result = true;
-		for(int i = 1 ; i<tictactoeboard.length ; i++)
-		{
-			if(tictactoeboard[i] != ' ')
+		for (int i = 1; i < tictactoeboard.length; i++) {
+			if (tictactoeboard[i] != ' ')
 				continue;
 			else {
 				result = false;
@@ -147,5 +149,21 @@ public class TicTacToeGame {
 			}
 		}
 		return result;
+	}
+
+	// Providing computers turn using generating random numbers from 1 to 9
+	private static void computersTurn(char[] tictactoeboard, char computer) {
+		int number = (int) Math.floor(Math.random() * 9) + 1;
+
+		if (tictactoeboard[number] == ' ') {
+			tictactoeboard[number] = computer;
+			System.out.println("\n");
+			displayBoard(tictactoeboard);
+		} else {
+			computersTurn(tictactoeboard, computer);
+			System.out.println("\n");
+			displayBoard(tictactoeboard);
+		}
+
 	}
 }
