@@ -35,6 +35,10 @@ public class TicTacToeGame {
 				}
 				System.out.println("player is playing");
 				abilityToMove(board, player);
+				if (isWinner(board, player)) {
+					System.out.println("Player own");
+					break;
+				}
 
 			}
 		} else {
@@ -52,6 +56,10 @@ public class TicTacToeGame {
 				}
 				System.out.println("Computer is playing");
 				computersTurn(board, computer);
+				if (isWinner(board, computer)) {
+					System.out.println("Computer own");
+					break;
+				}
 				// abilityToMove(board, computer);
 			}
 		}
@@ -153,18 +161,20 @@ public class TicTacToeGame {
 
 	// Providing computers turn using generating random numbers from 1 to 9
 	private static void computersTurn(char[] tictactoeboard, char computer) {
-
+		int select = 0;
 		for (int i = 1; i <= 9; i++) {
 			if (tictactoeboard[i] == ' ') {
 				tictactoeboard[i] = computer;
 				if (isWinner(tictactoeboard, computer)) {
-					continue;
+					select+=1;
+					break;
 				} else {
 					tictactoeboard[i] = ' ';
 				}
 			}
 		}
-
+		if(select != 1)
+		{
 		int number = (int) Math.floor(Math.random() * 9) + 1;
 
 		while (tictactoeboard[number] != ' ') {
@@ -172,6 +182,7 @@ public class TicTacToeGame {
 			number = (int) Math.floor(Math.random() * 9) + 1;
 		}
 		tictactoeboard[number] = computer;
+		}
 		displayBoard(tictactoeboard);
 
 	}
