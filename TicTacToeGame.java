@@ -52,7 +52,7 @@ public class TicTacToeGame {
 				}
 				System.out.println("Computer is playing");
 				computersTurn(board, computer);
-				//abilityToMove(board, computer);
+				// abilityToMove(board, computer);
 			}
 		}
 		if (isTie(board)) {
@@ -153,17 +153,26 @@ public class TicTacToeGame {
 
 	// Providing computers turn using generating random numbers from 1 to 9
 	private static void computersTurn(char[] tictactoeboard, char computer) {
+
+		for (int i = 1; i <= 9; i++) {
+			if (tictactoeboard[i] == ' ') {
+				tictactoeboard[i] = computer;
+				if (isWinner(tictactoeboard, computer)) {
+					continue;
+				} else {
+					tictactoeboard[i] = ' ';
+				}
+			}
+		}
+
 		int number = (int) Math.floor(Math.random() * 9) + 1;
 
-		if (tictactoeboard[number] == ' ') {
-			tictactoeboard[number] = computer;
-			System.out.println("\n");
-			displayBoard(tictactoeboard);
-		} else {
-			computersTurn(tictactoeboard, computer);
-			System.out.println("\n");
-			displayBoard(tictactoeboard);
+		while (tictactoeboard[number] != ' ') {
+
+			number = (int) Math.floor(Math.random() * 9) + 1;
 		}
+		tictactoeboard[number] = computer;
+		displayBoard(tictactoeboard);
 
 	}
 }
