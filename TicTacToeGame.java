@@ -4,8 +4,9 @@ public class TicTacToeGame {
 	static Scanner sc = new Scanner(System.in);
 	static final int HEAD = 0;
 	static final int TAIL = 1;
+
 	public static void main(String[] args) {
-		
+
 		System.out.println("Welcome to Tic Tac Toe");
 
 		char[] board = createBoard();
@@ -18,7 +19,44 @@ public class TicTacToeGame {
 		}
 		System.out.println("letter choosen by player: " + player + " computer: " + computer);
 		displayBoard(board);
-		toss(board, player);
+		char whoWon = toss(player, computer);
+		if (whoWon == player) {
+			abilityToMove(board, player);
+			for (int i = 0; i < 4; i++) {
+				if (isWinner(board, player)) {
+					System.out.println("Player own");
+					break;
+				}
+				System.out.println("Computer is playing");
+				abilityToMove(board, computer);
+				if (isWinner(board, player)) {
+					System.out.println("Computer own");
+					break;
+				}
+				System.out.println("player is playing");
+				abilityToMove(board, player);
+
+			}
+		} else {
+			abilityToMove(board, computer);
+			for (int i = 0; i < 4; i++) {
+				if (isWinner(board, player)) {
+					System.out.println("Computer own");
+					break;
+				}
+				System.out.println("player is playing");
+				abilityToMove(board, player);
+				if (isWinner(board, player)) {
+					System.out.println("Player own");
+					break;
+				}
+				System.out.println("Computer is playing");
+				abilityToMove(board, computer);
+			}
+		}
+		if(isTie(board)) {
+			System.out.println("It's tie");
+		}
 	}
 
 	// Creating the empty board
@@ -54,36 +92,60 @@ public class TicTacToeGame {
 		int position = sc.nextInt();
 		if (position > 9 || position < 1) {
 			System.out.println("please enter valid position");
-			abilityToMove(tictactoeboard,player);
+			abilityToMove(tictactoeboard, player);
 		} else {
 			if (tictactoeboard[position] == ' ') {
 				tictactoeboard[position] = player;
 				displayBoard(tictactoeboard);
-				System.out.println("Choose 1. for playing  2. Exit");
-				int option = sc.nextInt();
-				if(option == 1)
-				{
-				abilityToMove(tictactoeboard,player);
-				}
+				// System.out.println("Choose 1. for playing 2. Exit");
+				// int option = sc.nextInt();
+				// if (option == 1) {
+				// abilityToMove(tictactoeboard, player);
+				// }
 			} else {
-				System.out.println("Enter Valid position\n");
-				abilityToMove(tictactoeboard,player);
+				System.out.println("Enter Valid position its accupied\n");
+				abilityToMove(tictactoeboard, player);
 			}
 		}
 	}
-	
-	//toss to start the game
-	private static void toss(char[] tictactoeboard, char player) {
-		int toss_in_the_sky = (int)Math.floor(Math.random()*2);
-		switch(toss_in_the_sky) {
-		case HEAD:
-			System.out.println("player won the toss");
-			break;
-		case TAIL:
-			System.out.println("Computer won the toss");
-			break;
-		}
-		
-	}
 
+	// toss to start the game
+	private static char toss(char player, char computer) {
+		char result = ' ';
+		int toss_in_the_sky = (int) Math.floor(Math.random() * 2);
+		if (toss_in_the_sky == HEAD) {
+			System.out.println("player won the toss");
+			result = player;
+		} else if (toss_in_the_sky == TAIL) {
+			System.out.println("Computer won the toss");
+			result = computer;
+		}
+		return result;
+	}
+	// Checking for winning condition
+	private static boolean isWinner(char[] tictactoeboard, char l) {
+		boolean result = ((tictactoeboard[1] == l && tictactoeboard[2] == l && tictactoeboard[3] == l)
+				|| (tictactoeboard[4] == l && tictactoeboard[5] == l && tictactoeboard[6] == l)
+				|| (tictactoeboard[7] == l && tictactoeboard[8] == l && tictactoeboard[9] == l)
+				|| (tictactoeboard[1] == l && tictactoeboard[4] == l && tictactoeboard[7] == l)
+				|| (tictactoeboard[2] == l && tictactoeboard[5] == l && tictactoeboard[8] == l)
+				|| (tictactoeboard[3] == l && tictactoeboard[6] == l && tictactoeboard[9] == l)
+				|| (tictactoeboard[1] == l && tictactoeboard[5] == l && tictactoeboard[9] == l)
+				|| (tictactoeboard[3] == l && tictactoeboard[5] == l && tictactoeboard[7] == l));
+		return result;
+	}
+	//checking for tie condition
+	private static boolean isTie(char[] tictactoeboard) {
+		boolean result = true;
+		for(int i = 1 ; i<tictactoeboard.length ; i++)
+		{
+			if(tictactoeboard[i] != ' ')
+				continue;
+			else {
+				result = false;
+				break;
+			}
+		}
+		return result;
+	}
 }
