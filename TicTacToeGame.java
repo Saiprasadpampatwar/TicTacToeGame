@@ -2,9 +2,10 @@ import java.util.Scanner;
 
 public class TicTacToeGame {
 	static Scanner sc = new Scanner(System.in);
-
+	static final int HEAD = 0;
+	static final int TAIL = 1;
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		
 		System.out.println("Welcome to Tic Tac Toe");
 
 		char[] board = createBoard();
@@ -17,7 +18,7 @@ public class TicTacToeGame {
 		}
 		System.out.println("letter choosen by player: " + player + " computer: " + computer);
 		displayBoard(board);
-		abilityToMove(board);
+		toss(board, player);
 	}
 
 	// Creating the empty board
@@ -48,22 +49,41 @@ public class TicTacToeGame {
 	}
 
 	// Ability to move anywhere in board while checking the space is empty
-	private static void abilityToMove(char[] tictactoeboard) {
+	private static void abilityToMove(char[] tictactoeboard, char player) {
 		System.out.println("Enter the position where you want to move from(1 to 9):");
 		int position = sc.nextInt();
 		if (position > 9 || position < 1) {
 			System.out.println("please enter valid position");
-			abilityToMove(tictactoeboard);
+			abilityToMove(tictactoeboard,player);
 		} else {
 			if (tictactoeboard[position] == ' ') {
-				tictactoeboard[position] = 'X';
+				tictactoeboard[position] = player;
 				displayBoard(tictactoeboard);
-				abilityToMove(tictactoeboard);
+				System.out.println("Choose 1. for playing  2. Exit");
+				int option = sc.nextInt();
+				if(option == 1)
+				{
+				abilityToMove(tictactoeboard,player);
+				}
 			} else {
 				System.out.println("Enter Valid position\n");
-				abilityToMove(tictactoeboard);
+				abilityToMove(tictactoeboard,player);
 			}
 		}
+	}
+	
+	//toss to start the game
+	private static void toss(char[] tictactoeboard, char player) {
+		int toss_in_the_sky = (int)Math.floor(Math.random()*2);
+		switch(toss_in_the_sky) {
+		case HEAD:
+			System.out.println("player won the toss");
+			break;
+		case TAIL:
+			System.out.println("Computer won the toss");
+			break;
+		}
+		
 	}
 
 }
