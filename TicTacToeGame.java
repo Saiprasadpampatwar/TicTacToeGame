@@ -28,7 +28,7 @@ public class TicTacToeGame {
 					break;
 				}
 				System.out.println("Computer is playing");
-				computersTurn(board, computer,player);
+				computersTurn(board, computer, player);
 				if (isWinner(board, computer)) {
 					System.out.println("Computer own");
 					break;
@@ -38,7 +38,7 @@ public class TicTacToeGame {
 
 			}
 		} else {
-			computersTurn(board, computer,player);
+			computersTurn(board, computer, player);
 			for (int i = 0; i < 4; i++) {
 				if (isWinner(board, computer)) {
 					System.out.println("Computer own");
@@ -152,7 +152,7 @@ public class TicTacToeGame {
 	}
 
 	// Providing computers turn using generating random numbers from 1 to 9
-	private static void computersTurn(char[] tictactoeboard, char computer,char player) {
+	private static void computersTurn(char[] tictactoeboard, char computer, char player) {
 		int select = 0;
 		for (int i = 1; i <= 9; i++) {
 			if (tictactoeboard[i] == ' ') {
@@ -166,27 +166,32 @@ public class TicTacToeGame {
 			}
 		}
 
-		if(select != 1)
-		{
+		if (select != 1) {
 			int bposition = blockPosition(tictactoeboard, player);
-			if(bposition<=9 && bposition>=1) {
+			if (bposition <= 9 && bposition >= 1) {
 				tictactoeboard[bposition] = computer;
-			}
-			else {
-				int number = (int) Math.floor(Math.random() * 9) + 1;
+			} else {
+				int cPosition = chooseCornerPosition(tictactoeboard);
+				if(cPosition<=9 && cPosition>=1)
+				{
+					tictactoeboard[cPosition] = computer;
+				}else {
+					int number = (int) Math.floor(Math.random() * 9) + 1;
 
-				while (tictactoeboard[number] != ' ') {
+					while (tictactoeboard[number] != ' ') {
 
-					number = (int) Math.floor(Math.random() * 9) + 1;
+						number = (int) Math.floor(Math.random() * 9) + 1;
+					}
+					tictactoeboard[number] = computer;
 				}
-				tictactoeboard[number] = computer;
-				}
+				
 			}
-		
+		}
+
 		displayBoard(tictactoeboard);
 	}
-	
-	//Checking for blocking position so that opponent can't win
+
+	// Checking for blocking position so that opponent can't win
 	private static int blockPosition(char[] tictactoeboard, char player) {
 		int position = 0;
 		for (int i = 1; i <= 9; i++) {
@@ -201,5 +206,17 @@ public class TicTacToeGame {
 			}
 		}
 		return position;
+	}
+
+	// UC10 choosing corner positions
+	private static int chooseCornerPosition(char[] tictactoeboard) {
+		int[] boardCorners = { 1, 3, 7, 9 };
+		for (int position = 0; position < boardCorners.length; position++) {
+			if (tictactoeboard[boardCorners[position]] == ' ') {
+				return boardCorners[position];
+			}
+
+		}
+		return 0;
 	}
 }
