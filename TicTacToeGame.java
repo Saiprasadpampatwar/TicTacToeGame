@@ -20,7 +20,19 @@ public class TicTacToeGame {
 		System.out.println("letter choosen by player: " + player + " computer: " + computer);
 		displayBoard(board);
 		char whoWon = toss(player, computer);
-		playingUntilGameEnds(whoWon, player, computer, board);
+		boolean result = playingUntilGameEnds(whoWon, player, computer, board);
+		while(result) {
+			System.out.println("Want to play again choose: 1.Play  2. exit");
+			int option = sc.nextInt();
+			switch(option) {
+			case 1:
+				result = playingUntilGameEnds(whoWon, player, computer, board);
+				break;
+			case 2:
+				System.out.println("Thank You!!!");
+				result = false;
+			}
+		}
 	}
 
 	// Creating the empty board
@@ -199,22 +211,30 @@ public class TicTacToeGame {
 		}
 		return centre;
 	}
-	private static void playingUntilGameEnds(char whoWon,char player,char computer,char[] board) {
+	private static boolean playingUntilGameEnds(char whoWon,char player,char computer,char[] board) {
+		boolean result = false;
 		if (whoWon == player) {
 			abilityToMove(board, player);
 			for (int i = 0; i < 4; i++) {
 				if (isWinner(board, player)) {
 					System.out.println("Player own");
+					result =true;
 					break;
 				}
 				System.out.println("Computer is playing");
 				computersTurn(board, computer, player);
 				if (isWinner(board, computer)) {
 					System.out.println("Computer own");
+					result = true;
 					break;
 				}
 				System.out.println("player is playing");
 				abilityToMove(board, player);
+				if (isWinner(board, player)) {
+					System.out.println("Player own");
+					result =true;
+					break;
+				}
 
 			}
 		} else {
@@ -222,21 +242,29 @@ public class TicTacToeGame {
 			for (int i = 0; i < 4; i++) {
 				if (isWinner(board, computer)) {
 					System.out.println("Computer own");
+					result = true;
 					break;
 				}
 				System.out.println("player is playing");
 				abilityToMove(board, player);
 				if (isWinner(board, player)) {
 					System.out.println("Player own");
+					result = true;
 					break;
 				}
 				System.out.println("Computer is playing");
 				computersTurn(board, computer, player);
-				// abilityToMove(board, computer);
+				if (isWinner(board, computer)) {
+					System.out.println("Computer own");
+					result = true;
+					break;
+				}
 			}
 		}
 		if (isTie(board)) {
 			System.out.println("It's tie");
+			result =true;
 		}
+		return result;
 	}
 }
