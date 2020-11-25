@@ -28,7 +28,7 @@ public class TicTacToeGame {
 					break;
 				}
 				System.out.println("Computer is playing");
-				computersTurn(board, computer);
+				computersTurn(board, computer,player);
 				if (isWinner(board, computer)) {
 					System.out.println("Computer own");
 					break;
@@ -38,7 +38,7 @@ public class TicTacToeGame {
 
 			}
 		} else {
-			computersTurn(board, computer);
+			computersTurn(board, computer,player);
 			for (int i = 0; i < 4; i++) {
 				if (isWinner(board, computer)) {
 					System.out.println("Computer own");
@@ -51,7 +51,7 @@ public class TicTacToeGame {
 					break;
 				}
 				System.out.println("Computer is playing");
-				computersTurn(board, computer);
+				computersTurn(board, computer, player);
 				// abilityToMove(board, computer);
 			}
 		}
@@ -152,12 +152,13 @@ public class TicTacToeGame {
 	}
 
 	// Providing computers turn using generating random numbers from 1 to 9
-	private static void computersTurn(char[] tictactoeboard, char computer) {
-
+	private static void computersTurn(char[] tictactoeboard, char computer,char player) {
+		int select = 0;
 		for (int i = 1; i <= 9; i++) {
 			if (tictactoeboard[i] == ' ') {
 				tictactoeboard[i] = computer;
 				if (isWinner(tictactoeboard, computer)) {
+					select = 1;
 					continue;
 				} else {
 					tictactoeboard[i] = ' ';
@@ -165,14 +166,40 @@ public class TicTacToeGame {
 			}
 		}
 
-		int number = (int) Math.floor(Math.random() * 9) + 1;
+		if(select != 1)
+		{
+			int bposition = blockPosition(tictactoeboard, player);
+			if(bposition<=9 && bposition>=1) {
+				tictactoeboard[bposition] = computer;
+			}
+			else {
+				int number = (int) Math.floor(Math.random() * 9) + 1;
 
-		while (tictactoeboard[number] != ' ') {
+				while (tictactoeboard[number] != ' ') {
 
-			number = (int) Math.floor(Math.random() * 9) + 1;
-		}
-		tictactoeboard[number] = computer;
+					number = (int) Math.floor(Math.random() * 9) + 1;
+				}
+				tictactoeboard[number] = computer;
+				}
+			}
+		
 		displayBoard(tictactoeboard);
-
+	}
+	
+	//Checking for blocking position so that opponent can't win
+	private static int blockPosition(char[] tictactoeboard, char player) {
+		int position = 0;
+		for (int i = 1; i <= 9; i++) {
+			if (tictactoeboard[i] == ' ') {
+				tictactoeboard[i] = player;
+				if (isWinner(tictactoeboard, player)) {
+					position = i;
+					break;
+				} else {
+					tictactoeboard[i] = ' ';
+				}
+			}
+		}
+		return position;
 	}
 }
