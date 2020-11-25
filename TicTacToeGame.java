@@ -35,10 +35,6 @@ public class TicTacToeGame {
 				}
 				System.out.println("player is playing");
 				abilityToMove(board, player);
-				if (isWinner(board, player)) {
-					System.out.println("Player own");
-					break;
-				}
 
 			}
 		} else {
@@ -55,15 +51,7 @@ public class TicTacToeGame {
 					break;
 				}
 				System.out.println("Computer is playing");
-<<<<<<< HEAD
-				computersTurn(board, computer);
-				if (isWinner(board, computer)) {
-					System.out.println("Computer own");
-					break;
-				}
-=======
 				computersTurn(board, computer, player);
->>>>>>> UC9_Blocking_the_win
 				// abilityToMove(board, computer);
 			}
 		}
@@ -164,33 +152,19 @@ public class TicTacToeGame {
 	}
 
 	// Providing computers turn using generating random numbers from 1 to 9
-<<<<<<< HEAD
-	private static void computersTurn(char[] tictactoeboard, char computer) {
-=======
 	private static void computersTurn(char[] tictactoeboard, char computer,char player) {
->>>>>>> UC9_Blocking_the_win
 		int select = 0;
 		for (int i = 1; i <= 9; i++) {
 			if (tictactoeboard[i] == ' ') {
 				tictactoeboard[i] = computer;
 				if (isWinner(tictactoeboard, computer)) {
-<<<<<<< HEAD
-					select+=1;
-					break;
-=======
 					select = 1;
 					continue;
->>>>>>> UC9_Blocking_the_win
 				} else {
 					tictactoeboard[i] = ' ';
 				}
 			}
 		}
-<<<<<<< HEAD
-		if(select != 1)
-		{
-		int number = (int) Math.floor(Math.random() * 9) + 1;
-=======
 
 		if(select != 1)
 		{
@@ -200,23 +174,15 @@ public class TicTacToeGame {
 			}
 			else {
 				int number = (int) Math.floor(Math.random() * 9) + 1;
->>>>>>> UC9_Blocking_the_win
 
 				while (tictactoeboard[number] != ' ') {
 
-<<<<<<< HEAD
-			number = (int) Math.floor(Math.random() * 9) + 1;
-		}
-		tictactoeboard[number] = computer;
-		}
-=======
 					number = (int) Math.floor(Math.random() * 9) + 1;
 				}
 				tictactoeboard[number] = computer;
 				}
 			}
 		
->>>>>>> UC9_Blocking_the_win
 		displayBoard(tictactoeboard);
 	}
 	
