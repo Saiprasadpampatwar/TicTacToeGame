@@ -175,7 +175,13 @@ public class TicTacToeGame {
 				if(cPosition<=9 && cPosition>=1)
 				{
 					tictactoeboard[cPosition] = computer;
-				}else {
+				}
+				else if(chooseCentre(tictactoeboard))
+				{
+					tictactoeboard[5] = computer;
+				}
+				else 
+				{
 					int number = (int) Math.floor(Math.random() * 9) + 1;
 
 					while (tictactoeboard[number] != ' ') {
@@ -208,7 +214,7 @@ public class TicTacToeGame {
 		return position;
 	}
 
-	// UC10 choosing corner positions
+	// choosing corner positions
 	private static int chooseCornerPosition(char[] tictactoeboard) {
 		int[] boardCorners = { 1, 3, 7, 9 };
 		for (int position = 0; position < boardCorners.length; position++) {
@@ -218,5 +224,14 @@ public class TicTacToeGame {
 
 		}
 		return 0;
+	}
+	
+	// ChoosingCentre position 
+	private static boolean chooseCentre(char[] tictactoeboard) {
+		boolean centre = false;
+		if(tictactoeboard[5]==' ') {
+			centre = true;
+		}
+		return centre;
 	}
 }
