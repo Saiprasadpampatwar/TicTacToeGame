@@ -20,44 +20,7 @@ public class TicTacToeGame {
 		System.out.println("letter choosen by player: " + player + " computer: " + computer);
 		displayBoard(board);
 		char whoWon = toss(player, computer);
-		if (whoWon == player) {
-			abilityToMove(board, player);
-			for (int i = 0; i < 4; i++) {
-				if (isWinner(board, player)) {
-					System.out.println("Player own");
-					break;
-				}
-				System.out.println("Computer is playing");
-				computersTurn(board, computer, player);
-				if (isWinner(board, computer)) {
-					System.out.println("Computer own");
-					break;
-				}
-				System.out.println("player is playing");
-				abilityToMove(board, player);
-
-			}
-		} else {
-			computersTurn(board, computer, player);
-			for (int i = 0; i < 4; i++) {
-				if (isWinner(board, computer)) {
-					System.out.println("Computer own");
-					break;
-				}
-				System.out.println("player is playing");
-				abilityToMove(board, player);
-				if (isWinner(board, player)) {
-					System.out.println("Player own");
-					break;
-				}
-				System.out.println("Computer is playing");
-				computersTurn(board, computer, player);
-				// abilityToMove(board, computer);
-			}
-		}
-		if (isTie(board)) {
-			System.out.println("It's tie");
-		}
+		playingUntilGameEnds(whoWon, player, computer, board);
 	}
 
 	// Creating the empty board
@@ -176,19 +139,21 @@ public class TicTacToeGame {
 				{
 					tictactoeboard[cPosition] = computer;
 				}
-				else if(chooseCentre(tictactoeboard))
-				{
-					tictactoeboard[5] = computer;
-				}
 				else 
 				{
-					int number = (int) Math.floor(Math.random() * 9) + 1;
-
-					while (tictactoeboard[number] != ' ') {
-
-						number = (int) Math.floor(Math.random() * 9) + 1;
+					if(chooseCentre(tictactoeboard)) {
+						tictactoeboard[5] = computer;
 					}
-					tictactoeboard[number] = computer;
+					else {
+						int number = (int) Math.floor(Math.random() * 9) + 1;
+
+						while (tictactoeboard[number] != ' ') {
+
+							number = (int) Math.floor(Math.random() * 9) + 1;
+						}
+						tictactoeboard[number] = computer;
+					}
+					
 				}
 				
 			}
@@ -233,5 +198,45 @@ public class TicTacToeGame {
 			centre = true;
 		}
 		return centre;
+	}
+	private static void playingUntilGameEnds(char whoWon,char player,char computer,char[] board) {
+		if (whoWon == player) {
+			abilityToMove(board, player);
+			for (int i = 0; i < 4; i++) {
+				if (isWinner(board, player)) {
+					System.out.println("Player own");
+					break;
+				}
+				System.out.println("Computer is playing");
+				computersTurn(board, computer, player);
+				if (isWinner(board, computer)) {
+					System.out.println("Computer own");
+					break;
+				}
+				System.out.println("player is playing");
+				abilityToMove(board, player);
+
+			}
+		} else {
+			computersTurn(board, computer, player);
+			for (int i = 0; i < 4; i++) {
+				if (isWinner(board, computer)) {
+					System.out.println("Computer own");
+					break;
+				}
+				System.out.println("player is playing");
+				abilityToMove(board, player);
+				if (isWinner(board, player)) {
+					System.out.println("Player own");
+					break;
+				}
+				System.out.println("Computer is playing");
+				computersTurn(board, computer, player);
+				// abilityToMove(board, computer);
+			}
+		}
+		if (isTie(board)) {
+			System.out.println("It's tie");
+		}
 	}
 }
